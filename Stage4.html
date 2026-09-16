@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Stage 04 — Professional & Research Robotics | Robodarshan Learning</title>
+    <meta content="Stage 4 of the Robodarshan learning path: professional robotics software, advanced ROS 2, kinematics, control, perception, SLAM, planning, manipulation, aerial robotics, AI, simulation, system integration, testing, competition robotics and research." name="description" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link href="/styles.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://assets-global.website-files.com/657cba550bc392281580fd5e/6580d26f3518ced5e0bc4114_RoboDarsha%20Logo%20Black%20Trans.png"
+        rel="shortcut icon" type="image/x-icon" />
+
+    <style>
+        :root {
+            --lm-bg: #0a0f0d;
+            --lm-panel: #101714;
+            --lm-line: #223029;
+            --lm-copper: #c9793f;
+            --lm-teal: #4fd1b5;
+            --lm-gold: #e8b64c;
+            --lm-text: #e9efeb;
+            --lm-muted: #869489;
+        }
+
+        .s4-section {
+            background: var(--lm-bg);
+            color: var(--lm-text);
+            padding: 100px 24px 100px;
+            font-family: 'Vollkorn', Georgia, serif;
+            min-height: 100vh;
+        }
+
+        .s4-wrap {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .s4-back {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--lm-muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 30px;
+        }
+
+        .s4-back:hover { color: var(--lm-teal); }
+
+        .s4-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            letter-spacing: 0.04em;
+            color: var(--lm-teal);
+            margin: 0 0 14px;
+        }
+
+        .s4-title {
+            font-size: clamp(32px, 4.6vw, 46px);
+            line-height: 1.1;
+            margin: 0 0 16px;
+            font-weight: 700;
+        }
+
+        .s4-intro {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--lm-muted);
+            max-width: 62ch;
+            margin: 0 0 56px;
+        }
+
+        .s4-path {
+            position: relative;
+        }
+
+        .s4-path::before {
+            content: "";
+            position: absolute;
+            left: 21px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--lm-teal), var(--lm-line) 96%);
+        }
+
+        .s4-module {
+            position: relative;
+            padding-left: 64px;
+            margin-bottom: 8px;
+        }
+
+        .s4-module-num {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--lm-line);
+            background: var(--lm-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--lm-muted);
+            z-index: 1;
+        }
+
+        .s4-module--project .s4-module-num {
+            border-color: var(--lm-copper);
+            color: var(--lm-copper);
+        }
+
+        .s4-module--challenge .s4-module-num {
+            border-color: var(--lm-gold);
+            color: var(--lm-gold);
+        }
+
+        .s4-module-card {
+            background: var(--lm-panel);
+            border: 1px solid var(--lm-line);
+            border-radius: 6px;
+        }
+
+        .s4-module--project .s4-module-card {
+            border-color: rgba(201, 121, 63, 0.4);
+            background: linear-gradient(135deg, rgba(201, 121, 63, 0.06), var(--lm-panel) 60%);
+        }
+
+        .s4-module--challenge .s4-module-card {
+            border-color: rgba(232, 182, 76, 0.5);
+            background: linear-gradient(135deg, rgba(232, 182, 76, 0.08), var(--lm-panel) 60%);
+        }
+
+        .s4-module-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 18px 22px;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .s4-module-head::-webkit-details-marker { display: none; }
+
+        .s4-module-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .s4-module-icon { font-size: 16px; }
+
+        .s4-toggle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 18px;
+            color: var(--lm-muted);
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        details[open] .s4-toggle { transform: rotate(45deg); }
+
+        .s4-branch {
+            list-style: none;
+            margin: 0;
+            padding: 0 22px 20px 22px;
+        }
+
+        .s4-branch li {
+            position: relative;
+            padding: 8px 0 8px 26px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13.5px;
+            color: var(--lm-muted);
+            border-top: 1px solid var(--lm-line);
+        }
+
+        .s4-branch li:first-child { border-top: none; }
+
+        .s4-branch li::before {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 17px;
+            width: 12px;
+            height: 1px;
+            background: var(--lm-line);
+        }
+
+        @media (max-width: 600px) {
+            .s4-section { padding: 84px 16px 70px; }
+            .s4-module { padding-left: 52px; }
+            .s4-module-num { width: 36px; height: 36px; font-size: 12px; }
+            .s4-path::before { left: 17px; }
+            .s4-module-head { padding: 16px; }
+            .s4-module-title { font-size: 16px; }
+        }
+    </style>
+</head>
+
+<body class="body">
+    <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
+        role="banner" class="navbar w-nav">
+        <div class="div-block-nav">
+            <a href="/" class="brand w-nav-brand">
+                <img
+                    src="https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White.png"
+                    loading="lazy"
+                    sizes="(max-width: 479px) 88vw, (max-width: 767px) 60vw, 300px"
+                    srcset="https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White-p-500.png 500w, https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White.png 736w"
+                    alt="" />
+            </a>
+
+            <nav role="navigation" class="nav-menu w-nav-menu">
+                <a href="/events.html" class="nav-link w-nav-link">Events</a>
+                <a href="/merch.html" class="nav-link w-nav-link">Merch</a>
+                <a href="/learning.html" aria-current="page" class="nav-link w-nav-link w--current">Learning</a>
+                <a href="/about.html" class="nav-link w-nav-link">About</a>
+                <a href="/gallery.html" class="nav-link w-nav-link">Gallery</a>
+                <a href="/contact.html" class="nav-link w-nav-link">Contact</a>
+                <a href="/team.html" class="nav-link w-nav-link">Team</a>
+            </nav>
+
+            <div class="menu-button w-nav-button">
+                <div class="icon w-icon-nav-menu"></div>
+            </div>
+        </div>
+    </div>
+
+    <section class="s4-section">
+        <div class="s4-wrap">
+            <a href="/learning.html" class="s4-back">&#8592; Back to Learning Path</a>
+
+            <p class="s4-eyebrow">LEVEL 04</p>
+            <h1 class="s4-title">Professional &amp; Research Robotics</h1>
+            <p class="s4-intro">
+                Step into professional and research-level robotics — advanced software, ROS 2,
+                kinematics, control, perception, SLAM, planning, manipulation, aerial robotics,
+                AI, simulation, system integration, testing, competition robotics and research.
+            </p>
+
+            <div class="s4-path">
+
+                <div class="s4-module">
+                    <div class="s4-module-num">01</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">Advanced Robotics Software</h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>C++ for Robotics</li>
+                            <li>Python for Robotics</li>
+                            <li>Linux</li>
+                            <li>Git &amp; GitHub</li>
+                            <li>Docker</li>
+                            <li>Software Architecture</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module">
+                    <div class="s4-module-num">02</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">Advanced ROS 2</h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>ROS 2 Architecture</li>
+                            <li>TF / TF2</li>
+                            <li>URDF / Xacro</li>
+                            <li>Lifecycle Nodes</li>
+                            <li>ROS 2 Control</li>
+                            <li>Custom Messages</li>
+                            <li>Parameters</li>
+                            <li>Launch Systems</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module">
+                    <div class="s4-module-num">03</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">Advanced Robot Kinematics</h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>DH Parameters</li>
+                            <li>Manipulator Kinematics</li>
+                            <li>Jacobian</li>
+                            <li>Singularity</li>
+                            <li>Workspace</li>
+                            <li>Trajectory Generation</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module">
+                    <div class="s4-module-num">04</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">Advanced Control Systems</h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>State Space</li>
+                            <li>Feedback Linearization</li>
+                            <li>LQR</li>
+                            <li>MPC</li>
+                            <li>Adaptive Control</li>
+                            <li>Robust Control</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module">
+                    <div class="s4-module-num">05</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">Advanced Perception</h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>3D Vision</li>
+                            <li>Depth Cameras</li>
+                            <li>Point Clouds</li>
+                            <li>LiDAR Processing</li>
+                            <li>Object Detection</li>
+                            <li>Object Tracking</li>
+                            <li>3D Reconstruction</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module">
+                    <div class="s4-module-num">06</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">Advanced Localization &amp; SLAM</h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>EKF</li>
+                            <li>UKF</li>
+                            <li>Visual Odometry</li>
+                            <li>LiDAR SLAM</li>
+                            <li>Visual SLAM</li>
+                            <li>Multi-Sensor Fusion</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module">
+                    <div class="s4-module-num">07</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">Advanced Path Planning</h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>A*</li>
+                            <li>D*</li>
+                            <li>RRT</li>
+                            <li>RRT*</li>
+                            <li>Trajectory Planning</li>
+                            <li>Dynamic Obstacle Avoidance</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module">
+                    <div class="s4-module-num">08</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">Manipulation &amp; Robotic Arms</h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>Robotic Arm Architecture</li>
+                            <li>Forward Kinematics</li>
+                            <li>Inverse Kinematics</li>
+                            <li>Jacobian</li>
+                            <li>End Effectors</li>
+                            <li>Grippers</li>
+                            <li>Motion Planning</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module">
+                    <div class="s4-module-num">09</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">Aerial Robotics</h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>Multirotor Dynamics</li>
+                            <li>Flight Controllers</li>
+                            <li>ESC &amp; BLDC</li>
+                            <li>State Estimation</li>
+                            <li>Position Control</li>
+                            <li>GPS Navigation</li>
+                            <li>PX4</li>
+                            <li>ArduPilot</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module">
+                    <div class="s4-module-num">10</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">AI &amp; Robotics</h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>Deep Learning</li>
+                            <li>CNN</li>
+                            <li>Object Detection</li>
+                            <li>Reinforcement Learning</li>
+                            <li>Imitation Learning</li>
+                            <li>AI-Based Control</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module">
+                    <div class="s4-module-num">11</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">Digital Twin &amp; Simulation</h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>Gazebo</li>
+                            <li>Isaac Sim</li>
+                            <li>MATLAB / Simulink</li>
+                            <li>Hardware-in-the-Loop</li>
+                            <li>Software-in-the-Loop</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module">
+                    <div class="s4-module-num">12</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">Robotics System Integration</h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>Mechanical</li>
+                            <li>Electronics</li>
+                            <li>Embedded</li>
+                            <li>Software</li>
+                            <li>Communication</li>
+                            <li>Power</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module">
+                    <div class="s4-module-num">13</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">Reliability &amp; Testing</h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>Unit Testing</li>
+                            <li>Simulation Testing</li>
+                            <li>Hardware Testing</li>
+                            <li>Fault Detection</li>
+                            <li>Safety</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module s4-module--project">
+                    <div class="s4-module-num">14</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">
+                                <span class="s4-module-icon">&#127942;</span>
+                                COMPETITION ROBOTICS
+                            </h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>Problem Analysis</li>
+                            <li>Strategy</li>
+                            <li>Mechanical Design</li>
+                            <li>Electronics</li>
+                            <li>Autonomous Systems</li>
+                            <li>Optimization</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module">
+                    <div class="s4-module-num">15</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">
+                                <span class="s4-module-icon">&#128300;</span>
+                                RESEARCH &amp; DEVELOPMENT
+                            </h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                        <ul class="s4-branch">
+                            <li>Reading Research Papers</li>
+                            <li>Literature Review</li>
+                            <li>Experiment Design</li>
+                            <li>Data Collection</li>
+                            <li>Results &amp; Analysis</li>
+                            <li>Technical Documentation</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s4-module s4-module--challenge">
+                    <div class="s4-module-num">16</div>
+                    <details class="s4-module-card">
+                        <summary class="s4-module-head">
+                            <h2 class="s4-module-title">
+                                <span class="s4-module-icon">&#127942;</span>
+                                LEVEL 4 CAPSTONE
+                            </h2>
+                            <span class="s4-toggle">+</span>
+                        </summary>
+                    </details>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="footer">
+        <div class="div-block-nav footer">
+            <div class="div-block-left-footer">
+                <div class="w-layout-vflex">
+                    <a href="/" class="brand footer w-inline-block">
+                        <img
+                            src="https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White.png"
+                            loading="lazy"
+                            sizes="(max-width: 479px) 92vw, (max-width: 767px) 63vw, (max-width: 991px) 36vw, 300px"
+                            srcset="https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White-p-500.png 500w, https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White.png 736w"
+                            alt="" />
+                    </a>
+                    <div class="text-block">Address:</div>
+                    <div class="text-block-2">IIEST, Botanical Garden Area, Howrah, West Bengal 711103</div>
+                    <div class="text-block">Contact:</div>
+                    <a href="mailto:robodarshan@gmail.com" class="link-block-email w-inline-block">
+                        <div class="text-block-2">robodarshan@gmail.com</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="div-block-right-footer">
+                <div class="w-layout-vflex flex-block-2">
+                    <div class="div-block-right-footer-inside">
+                        <a href="/about.html" class="link-footer">About Us</a>
+                        <a href="/team.html" class="link-footer">Team</a>
+                        <a href="/contact.html" class="link-footer">Contact</a>
+                    </div>
+                    <div class="div-block-right-footer-inside">
+                        <a href="/merch.html" class="link-footer">Merchandise</a>
+                        <a href="/events.html" class="link-footer">Events</a>
+                        <a href="/gallery.html" class="link-footer">Gallery</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="div-block-footer-base">
+            <div class="copyright">© 2023 Robodarshan Robotics Society</div>
+        </div>
+    </section>
+</body>
+
+</html>

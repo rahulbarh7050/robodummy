@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Stage 02 — Robotics Intermediate | Robodarshan Learning</title>
+    <meta content="Stage 2 of the Robodarshan learning path: ESP32, intermediate programming, sensors, mechanics, motor control, PID, robotics projects, PCB design and power systems." name="description" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link href="/styles.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://assets-global.website-files.com/657cba550bc392281580fd5e/6580d26f3518ced5e0bc4114_RoboDarsha%20Logo%20Black%20Trans.png"
+        rel="shortcut icon" type="image/x-icon" />
+
+    <style>
+        :root {
+            --lm-bg: #0a0f0d;
+            --lm-panel: #101714;
+            --lm-line: #223029;
+            --lm-copper: #c9793f;
+            --lm-teal: #4fd1b5;
+            --lm-gold: #e8b64c;
+            --lm-text: #e9efeb;
+            --lm-muted: #869489;
+        }
+
+        .s2-section {
+            background: var(--lm-bg);
+            color: var(--lm-text);
+            padding: 100px 24px 100px;
+            font-family: 'Vollkorn', Georgia, serif;
+            min-height: 100vh;
+        }
+
+        .s2-wrap {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .s2-back {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--lm-muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 30px;
+        }
+
+        .s2-back:hover { color: var(--lm-teal); }
+
+        .s2-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            letter-spacing: 0.04em;
+            color: var(--lm-teal);
+            margin: 0 0 14px;
+        }
+
+        .s2-title {
+            font-size: clamp(32px, 4.6vw, 46px);
+            line-height: 1.1;
+            margin: 0 0 16px;
+            font-weight: 700;
+        }
+
+        .s2-intro {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--lm-muted);
+            max-width: 62ch;
+            margin: 0 0 56px;
+        }
+
+        .s2-path {
+            position: relative;
+        }
+
+        .s2-path::before {
+            content: "";
+            position: absolute;
+            left: 21px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--lm-teal), var(--lm-line) 96%);
+        }
+
+        .s2-module {
+            position: relative;
+            padding-left: 64px;
+            margin-bottom: 8px;
+        }
+
+        .s2-module-num {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--lm-line);
+            background: var(--lm-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--lm-muted);
+            z-index: 1;
+        }
+
+        .s2-module--project .s2-module-num {
+            border-color: var(--lm-copper);
+            color: var(--lm-copper);
+        }
+
+        .s2-module--challenge .s2-module-num {
+            border-color: var(--lm-gold);
+            color: var(--lm-gold);
+        }
+
+        .s2-module-card {
+            background: var(--lm-panel);
+            border: 1px solid var(--lm-line);
+            border-radius: 6px;
+        }
+
+        .s2-module--project .s2-module-card {
+            border-color: rgba(201, 121, 63, 0.4);
+            background: linear-gradient(135deg, rgba(201, 121, 63, 0.06), var(--lm-panel) 60%);
+        }
+
+        .s2-module--challenge .s2-module-card {
+            border-color: rgba(232, 182, 76, 0.5);
+            background: linear-gradient(135deg, rgba(232, 182, 76, 0.08), var(--lm-panel) 60%);
+        }
+
+        .s2-module-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 18px 22px;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .s2-module-head::-webkit-details-marker { display: none; }
+
+        .s2-module-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .s2-module-icon { font-size: 16px; }
+
+        .s2-toggle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 18px;
+            color: var(--lm-muted);
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        details[open] .s2-toggle { transform: rotate(45deg); }
+
+        .s2-branch {
+            list-style: none;
+            margin: 0;
+            padding: 0 22px 20px 22px;
+        }
+
+        .s2-branch li {
+            position: relative;
+            padding: 8px 0 8px 26px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13.5px;
+            color: var(--lm-muted);
+            border-top: 1px solid var(--lm-line);
+        }
+
+        .s2-branch li:first-child { border-top: none; }
+
+        .s2-branch li::before {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 17px;
+            width: 12px;
+            height: 1px;
+            background: var(--lm-line);
+        }
+
+        @media (max-width: 600px) {
+            .s2-section { padding: 84px 16px 70px; }
+            .s2-module { padding-left: 52px; }
+            .s2-module-num { width: 36px; height: 36px; font-size: 12px; }
+            .s2-path::before { left: 17px; }
+            .s2-module-head { padding: 16px; }
+            .s2-module-title { font-size: 16px; }
+        }
+    </style>
+</head>
+
+<body class="body">
+    <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
+        role="banner" class="navbar w-nav">
+        <div class="div-block-nav">
+            <a href="/" class="brand w-nav-brand">
+                <img
+                    src="https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White.png"
+                    loading="lazy"
+                    sizes="(max-width: 479px) 88vw, (max-width: 767px) 60vw, 300px"
+                    srcset="https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White-p-500.png 500w, https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White.png 736w"
+                    alt="" />
+            </a>
+
+            <nav role="navigation" class="nav-menu w-nav-menu">
+                <a href="/events.html" class="nav-link w-nav-link">Events</a>
+                <a href="/merch.html" class="nav-link w-nav-link">Merch</a>
+                <a href="/learning.html" aria-current="page" class="nav-link w-nav-link w--current">Learning</a>
+                <a href="/about.html" class="nav-link w-nav-link">About</a>
+                <a href="/gallery.html" class="nav-link w-nav-link">Gallery</a>
+                <a href="/contact.html" class="nav-link w-nav-link">Contact</a>
+                <a href="/team.html" class="nav-link w-nav-link">Team</a>
+            </nav>
+
+            <div class="menu-button w-nav-button">
+                <div class="icon w-icon-nav-menu"></div>
+            </div>
+        </div>
+    </div>
+
+    <section class="s2-section">
+        <div class="s2-wrap">
+            <a href="/learning.html" class="s2-back">&#8592; Back to Learning Path</a>
+
+            <p class="s2-eyebrow">LEVEL 02</p>
+            <h1 class="s2-title">Robotics Intermediate</h1>
+            <p class="s2-intro">
+                Move beyond basic robot builds — ESP32, communication, intermediate programming,
+                sensors, robot mechanics, motor control, PID, autonomous robots, PCB design,
+                power systems and practical debugging.
+            </p>
+
+            <div class="s2-path">
+
+                <div class="s2-module">
+                    <div class="s2-module-num">01</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">ESP32 Fundamentals</h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>What is ESP32?</li>
+                            <li>ESP32 vs Arduino UNO</li>
+                            <li>ESP32 Board Overview</li>
+                            <li>Install ESP32 Board in Arduino IDE</li>
+                            <li>GPIO</li>
+                            <li>Digital I/O</li>
+                            <li>ADC</li>
+                            <li>PWM</li>
+                            <li>Built-in Wi-Fi</li>
+                            <li>Bluetooth / BLE</li>
+                            <li>First ESP32 Project</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s2-module">
+                    <div class="s2-module-num">02</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">ESP32 Communication &amp; IoT</h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>Serial Communication</li>
+                            <li>UART</li>
+                            <li>I²C</li>
+                            <li>SPI</li>
+                            <li>Wi-Fi Basics</li>
+                            <li>Web Server</li>
+                            <li>Bluetooth / BLE</li>
+                            <li>ESP32 Robot Control</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s2-module">
+                    <div class="s2-module-num">03</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">Intermediate Robotics Programming</h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>Arrays</li>
+                            <li>Structures</li>
+                            <li>Modular Programming</li>
+                            <li>millis()</li>
+                            <li>Interrupts</li>
+                            <li>State Machines</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s2-module">
+                    <div class="s2-module-num">04</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">Sensors — Intermediate</h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>IR Sensor Array</li>
+                            <li>Ultrasonic</li>
+                            <li>Encoders</li>
+                            <li>IMU</li>
+                            <li>Sensor Calibration</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s2-module">
+                    <div class="s2-module-num">05</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">Robot Mechanics</h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>Differential Drive</li>
+                            <li>Wheel Selection</li>
+                            <li>Torque</li>
+                            <li>RPM</li>
+                            <li>Gear Ratio</li>
+                            <li>Friction &amp; Traction</li>
+                            <li>Centre of Gravity</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s2-module">
+                    <div class="s2-module-num">06</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">Motor Control</h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>Open-loop Control</li>
+                            <li>Closed-loop Control</li>
+                            <li>Encoder Feedback</li>
+                            <li>Speed Matching</li>
+                            <li>Position Control — Introduction</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s2-module">
+                    <div class="s2-module-num">07</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">PID Control</h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>Error</li>
+                            <li>P</li>
+                            <li>I</li>
+                            <li>D</li>
+                            <li>PID</li>
+                            <li>Tuning</li>
+                            <li>Practical PID</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s2-module s2-module--project">
+                    <div class="s2-module-num">08</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">
+                                <span class="s2-module-icon">&#129302;</span>
+                                PROJECT — LINE FOLLOWER
+                            </h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>IR Sensor Array</li>
+                            <li>Basic Line Following</li>
+                            <li>Sensor Calibration</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s2-module s2-module--project">
+                    <div class="s2-module-num">09</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">
+                                <span class="s2-module-icon">&#129302;</span>
+                                PROJECT — PID LINE FOLLOWER
+                            </h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>Error Calculation</li>
+                            <li>PID</li>
+                            <li>Motor Speed Control</li>
+                            <li>PID Tuning</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s2-module s2-module--project">
+                    <div class="s2-module-num">10</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">
+                                <span class="s2-module-icon">&#129302;</span>
+                                PROJECT — MAZE SOLVER
+                            </h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>Junction Detection</li>
+                            <li>Decision Making</li>
+                            <li>Dead Ends</li>
+                            <li>Path Recording</li>
+                            <li>Shortest Path — Introduction</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s2-module">
+                    <div class="s2-module-num">11</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">PCB Design</h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>Schematic</li>
+                            <li>PCB Layout</li>
+                            <li>Routing</li>
+                            <li>DRC</li>
+                            <li>Gerber</li>
+                            <li>KiCad / EasyEDA</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s2-module">
+                    <div class="s2-module-num">12</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">Power Systems</h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>Power Budget</li>
+                            <li>Motor Current</li>
+                            <li>Battery Selection</li>
+                            <li>Voltage Regulators</li>
+                            <li>Buck Converters</li>
+                            <li>BMS</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s2-module">
+                    <div class="s2-module-num">13</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">Robot Debugging</h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>Sensor Problems</li>
+                            <li>Motor Problems</li>
+                            <li>Communication Problems</li>
+                            <li>Power Problems</li>
+                            <li>Calibration</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <div class="s2-module s2-module--challenge">
+                    <div class="s2-module-num">14</div>
+                    <details class="s2-module-card">
+                        <summary class="s2-module-head">
+                            <h2 class="s2-module-title">
+                                <span class="s2-module-icon">&#127942;</span>
+                                LEVEL 2 FINAL CHALLENGE
+                            </h2>
+                            <span class="s2-toggle">+</span>
+                        </summary>
+                        <ul class="s2-branch">
+                            <li>Level 2 Final Challenge</li>
+                        </ul>
+                    </details>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="footer">
+        <div class="div-block-nav footer">
+            <div class="div-block-left-footer">
+                <div class="w-layout-vflex">
+                    <a href="/" class="brand footer w-inline-block">
+                        <img
+                            src="https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White.png"
+                            loading="lazy"
+                            sizes="(max-width: 479px) 92vw, (max-width: 767px) 63vw, (max-width: 991px) 36vw, 300px"
+                            srcset="https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White-p-500.png 500w, https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White.png 736w"
+                            alt="" />
+                    </a>
+                    <div class="text-block">Address:</div>
+                    <div class="text-block-2">IIEST, Botanical Garden Area, Howrah, West Bengal 711103</div>
+                    <div class="text-block">Contact:</div>
+                    <a href="mailto:robodarshan@gmail.com" class="link-block-email w-inline-block">
+                        <div class="text-block-2">robodarshan@gmail.com</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="div-block-right-footer">
+                <div class="w-layout-vflex flex-block-2">
+                    <div class="div-block-right-footer-inside">
+                        <a href="/about.html" class="link-footer">About Us</a>
+                        <a href="/team.html" class="link-footer">Team</a>
+                        <a href="/contact.html" class="link-footer">Contact</a>
+                    </div>
+                    <div class="div-block-right-footer-inside">
+                        <a href="/merch.html" class="link-footer">Merchandise</a>
+                        <a href="/events.html" class="link-footer">Events</a>
+                        <a href="/gallery.html" class="link-footer">Gallery</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="div-block-footer-base">
+            <div class="copyright">© 2023 Robodarshan Robotics Society</div>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -33,6 +33,41 @@
     <link
         href="https://assets-global.website-files.com/657cba550bc392281580fd5e/6580d2a2d19d786bea7c1609_RoboDarsha%20Logo%20Black%20Trans%20(1).png"
         rel="apple-touch-icon" />
+    <style>
+        /* Featured homepage buttons (Learning Materials, Merch) — scoped highlight, doesn't touch styles.css */
+        .link-block-featured {
+            position: relative;
+        }
+
+        .link-block-featured .div-block-middle-small,
+        .link-block-featured .div-block-middle-big {
+            border: 1px solid #4fd1b5;
+            box-shadow: 0 0 0 1px rgba(79, 209, 181, 0.15), 0 0 28px rgba(79, 209, 181, 0.18);
+            background: linear-gradient(135deg, rgba(79, 209, 181, 0.08), rgba(201, 121, 63, 0.05));
+            transition: box-shadow 0.25s ease, transform 0.25s ease;
+        }
+
+        .link-block-featured:hover .div-block-middle-small,
+        .link-block-featured:hover .div-block-middle-big {
+            box-shadow: 0 0 0 1px rgba(79, 209, 181, 0.3), 0 0 40px rgba(79, 209, 181, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -10px;
+            right: 18px;
+            background: #4fd1b5;
+            color: #0a0f0d;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            padding: 3px 10px;
+            border-radius: 3px;
+            z-index: 2;
+        }
+    </style>
 </head>
 
 <body class="body">
@@ -44,7 +79,7 @@
                     srcset="https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White-p-500.png 500w, https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White.png 736w"
                     alt="" /></a>
             <nav role="navigation" class="nav-menu w-nav-menu"><a href="/events.html"
-                    class="nav-link w-nav-link">Events</a><a href="/merch.html" class="nav-link w-nav-link">Merch</a><a href="/about.html"
+                    class="nav-link w-nav-link">Events</a><a href="/merch.html" class="nav-link w-nav-link">Merch</a><a href="/learning.html" class="nav-link w-nav-link">Learning</a><a href="/about.html"
                     class="nav-link w-nav-link">About</a><a href="/gallery.html" class="nav-link w-nav-link">Gallery</a><a href="/contact.html"
                     class="nav-link w-nav-link">Contact</a> <a href="/team.html" class="nav-link w-nav-link">Team</a><a href="#" class="nav-link w-nav-link">Login</a></nav>
             <div class="menu-button w-nav-button">
@@ -90,6 +125,38 @@
                 </div>
             </div>
             <div id="w-node-f1d6f2eb-064f-be9c-243b-1bda42b4e9d7-1580fd62" class="div-block-middle"><a
+                    id="w-node-learning-materials-button" href="/learning.html"
+                    class="link-block-big-button link-block-featured w-inline-block">
+                    <span class="featured-badge">NEW</span>
+                    <div class="div-block-middle-big">
+                        <div class="div-block-middle-left"><img
+                                src="https://assets-global.website-files.com/657cba550bc392281580fd5e/657e05e44baf44bb58f8ad61_image.png"
+                                loading="lazy" sizes="(max-width: 767px) 50px, (max-width: 991px) 7vw, 6vw"
+                                alt="" class="button-image" /></div>
+                        <div class="div-block-middle-right">
+                            <h3 class="heading big">Learning Materials</h3>
+                            <p class="paragraph big">Arduino basics to advanced projects</p>
+                        </div>
+                    </div>
+                </a><a id="w-node-b97e87bb-cc04-f580-a6f8-8f126aef9e5f-1580fd62" href="/merch.html"
+                    class="link-block-big-button link-block-featured w-inline-block">
+                    <span class="featured-badge">NEW</span>
+                    <div id="w-node-_66357d1e-6133-70d5-5104-b37aa1b8b676-1580fd62"
+                        data-w-id="66357d1e-6133-70d5-5104-b37aa1b8b676"
+                        style="-webkit-transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                        class="div-block-middle-small">
+                        <div class="div-block-middle-left"><img
+                                src="https://assets-global.website-files.com/657cba550bc392281580fd5e/657df471dd1607d81527f159_image.png"
+                                loading="lazy" height="" alt=""
+                                sizes="(max-width: 479px) 18vw, (max-width: 767px) 50px, (max-width: 991px) 7vw, 6vw"
+                                srcset="https://assets-global.website-files.com/657cba550bc392281580fd5e/657df471dd1607d81527f159_image-p-500.png 500w, https://assets-global.website-files.com/657cba550bc392281580fd5e/657df471dd1607d81527f159_image.png 512w"
+                                class="button-image" /></div>
+                        <div class="div-block-middle-right">
+                            <h3 class="heading big">Merch</h3>
+                            <p class="paragraph big">Robodarshan Tshirts and more</p>
+                        </div>
+                    </div>
+                </a><a
                     id="w-node-_2fb418d8-8dbd-f416-f40e-4ee6f2406e5f-1580fd62" href="/events.html"
                     class="link-block-big-button w-inline-block">
                     <div id="w-node-c85e506f-cbc9-ce58-0319-7c49cced438f-1580fd62"
@@ -104,23 +171,6 @@
                         <div class="div-block-middle-right">
                             <h3 class="heading big">Events</h3>
                             <p class="paragraph big">Robocon, Automation and more</p>
-                        </div>
-                    </div>
-                </a><a id="w-node-b97e87bb-cc04-f580-a6f8-8f126aef9e5f-1580fd62" href="/merch.html"
-                    class="link-block-big-button w-inline-block">
-                    <div id="w-node-_66357d1e-6133-70d5-5104-b37aa1b8b676-1580fd62"
-                        data-w-id="66357d1e-6133-70d5-5104-b37aa1b8b676"
-                        style="-webkit-transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0.7, 0.7, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
-                        class="div-block-middle-small">
-                        <div class="div-block-middle-left"><img
-                                src="https://assets-global.website-files.com/657cba550bc392281580fd5e/657df471dd1607d81527f159_image.png"
-                                loading="lazy" height="" alt=""
-                                sizes="(max-width: 479px) 18vw, (max-width: 767px) 50px, (max-width: 991px) 7vw, 6vw"
-                                srcset="https://assets-global.website-files.com/657cba550bc392281580fd5e/657df471dd1607d81527f159_image-p-500.png 500w, https://assets-global.website-files.com/657cba550bc392281580fd5e/657df471dd1607d81527f159_image.png 512w"
-                                class="button-image" /></div>
-                        <div class="div-block-middle-right">
-                            <h3 class="heading big">Merch</h3>
-                            <p class="paragraph big">Robodarshan Tshirts and more</p>
                         </div>
                     </div>
                 </a><a id="w-node-_3b776331-5dd6-8b70-9c3c-a53aa168ffa8-1580fd62" href="/team.html"

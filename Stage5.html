@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Stage 05 | Robodarshan Learning</title>
+    <meta content="Stage 05 of the Robodarshan learning path — coming soon." name="description" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link href="/styles.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://assets-global.website-files.com/657cba550bc392281580fd5e/6580d26f3518ced5e0bc4114_RoboDarsha%20Logo%20Black%20Trans.png"
+        rel="shortcut icon" type="image/x-icon" />
+
+    <style>
+
+        :root {
+            --lm-bg: #0a0f0d;
+            --lm-panel: #101714;
+            --lm-line: #223029;
+            --lm-copper: #c9793f;
+            --lm-teal: #4fd1b5;
+            --lm-gold: #e8b64c;
+            --lm-text: #e9efeb;
+            --lm-muted: #869489;
+        }
+
+        .cs-section {
+            background: var(--lm-bg);
+            color: var(--lm-text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 24px 100px;
+            font-family: 'Vollkorn', Georgia, serif;
+            text-align: center;
+        }
+
+        .cs-wrap { max-width: 520px; }
+
+        .cs-gear {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 34px;
+            animation: cs-spin 12s linear infinite;
+        }
+
+        @keyframes cs-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cs-gear { animation: none; }
+        }
+
+        .cs-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            letter-spacing: 0.06em;
+            color: var(--lm-copper);
+            margin: 0 0 14px;
+        }
+
+        .cs-title {
+            font-size: clamp(30px, 5vw, 44px);
+            font-weight: 700;
+            margin: 0 0 16px;
+        }
+
+        .cs-body {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--lm-muted);
+            margin: 0 0 36px;
+        }
+
+        .cs-back {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--lm-bg);
+            background: var(--lm-teal);
+            padding: 12px 22px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cs-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 24px rgba(79, 209, 181, 0.35);
+        }
+    </style>
+</head>
+
+<body class="body">
+    <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
+        role="banner" class="navbar w-nav">
+        <div class="div-block-nav"><a href="/" class="brand w-nav-brand"><img
+                    src="https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White.png"
+                    loading="lazy" sizes="(max-width: 479px) 88vw, (max-width: 767px) 60vw, 300px"
+                    srcset="https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White-p-500.png 500w, https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White.png 736w"
+                    alt="" /></a>
+            <nav role="navigation" class="nav-menu w-nav-menu"><a href="/events.html" class="nav-link w-nav-link">Events</a><a href="/merch.html" class="nav-link w-nav-link">Merch</a><a href="/learning.html" aria-current="page" class="nav-link w-nav-link w--current">Learning</a><a href="/about.html" class="nav-link w-nav-link">About</a><a href="/gallery.html" class="nav-link w-nav-link">Gallery</a><a href="/contact.html" class="nav-link w-nav-link">Contact</a> <a href="/team.html" class="nav-link w-nav-link">Team</a></nav>
+            <div class="menu-button w-nav-button">
+                <div class="icon w-icon-nav-menu"></div>
+            </div>
+        </div>
+    </div>
+
+    <section class="cs-section">
+        <div class="cs-wrap">
+            <svg class="cs-gear" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke="var(--lm-teal)" stroke-width="3">
+                    <circle cx="50" cy="50" r="30" />
+                    <circle cx="50" cy="50" r="8" fill="var(--lm-teal)" stroke="none" />
+                    <g stroke="var(--lm-copper)">
+                        <line x1="50" y1="8" x2="50" y2="20" />
+                        <line x1="50" y1="80" x2="50" y2="92" />
+                        <line x1="8" y1="50" x2="20" y2="50" />
+                        <line x1="80" y1="50" x2="92" y2="50" />
+                        <line x1="20" y1="20" x2="28" y2="28" />
+                        <line x1="72" y1="72" x2="80" y2="80" />
+                        <line x1="80" y1="20" x2="72" y2="28" />
+                        <line x1="28" y1="72" x2="20" y2="80" />
+                    </g>
+                </g>
+            </svg>
+            <p class="cs-eyebrow">STAGE 05</p>
+            <h1 class="cs-title">Coming Soon</h1>
+            <p class="cs-body">We're building this stage of the path right now. Finish Stage 01 in the
+                meantime — it'll set you up for what's next.</p>
+            <a href="/learning.html" class="cs-back">&#8592; Back to Learning Path</a>
+        </div>
+    </section>
+
+    <section class="footer">
+        <div class="div-block-nav footer">
+            <div class="div-block-left-footer">
+                <div class="w-layout-vflex"><a href="/" class="brand footer w-inline-block"><img
+                            src="https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White.png"
+                            loading="lazy"
+                            sizes="(max-width: 479px) 92vw, (max-width: 767px) 63vw, (max-width: 991px) 36vw, 300px"
+                            srcset="https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White-p-500.png 500w, https://assets-global.website-files.com/657cba550bc392281580fd5e/657cc0ca198cae9affbdd1fd_Robodarshan%20Text%20Logo%20White.png 736w"
+                            alt="" /></a>
+                    <div class="text-block">Address:</div>
+                    <div class="text-block-2">IIEST, Botanical Garden Area, Howrah, West Bengal 711103</div>
+                    <div class="text-block">Contact:</div><a href="mailto:robodarshan@gmail.com"
+                        class="link-block-email w-inline-block">
+                        <div class="text-block-2">robodarshan@gmail.com</div>
+                    </a>
+                </div>
+            </div>
+            <div class="div-block-right-footer">
+                <div class="w-layout-vflex flex-block-2">
+                    <div class="div-block-right-footer-inside"><a href="/about.html" class="link-footer">About Us</a><a href="/team.html"
+                            class="link-footer">Team</a><a href="/contact.html" class="link-footer">Contact</a></div>
+                    <div class="div-block-right-footer-inside"><a href="/merch.html" class="link-footer">Merchandise</a><a
+                            href="/events.html" class="link-footer">Events</a><a href="/gallery.html" class="link-footer">Gallery</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="div-block-footer-base">
+            <div class="copyright">© 2023 Robodarshan Robotics Society</div>
+        </div>
+    </section>
+</body>
+
+</html>
